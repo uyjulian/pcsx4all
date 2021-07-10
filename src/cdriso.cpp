@@ -226,6 +226,7 @@ static void tok2msf(char *time, char *msf) {
 	}
 }
 
+#if 0
 #ifndef _WIN32
 static long GetTickCount(void) {
 	static time_t		initial_time = 0;
@@ -240,7 +241,9 @@ static long GetTickCount(void) {
 	return (now.tv_sec - initial_time) * 1000L + now.tv_usec / 1000L;
 }
 #endif
+#endif
 
+#if 0
 #ifdef _WIN32
 static void playthread(void *param)
 #else
@@ -330,7 +333,9 @@ static void *playthread(void *param)
 	return NULL;
 #endif
 }
+#endif
 
+#if 0
 // stop the CDDA playback
 static void stopCDDA() {
 	if (!playing) {
@@ -344,7 +349,9 @@ static void stopCDDA() {
 	pthread_join(threadid, NULL);
 #endif
 }
+#endif
 
+#if 0
 // start the CDDA playback
 static void startCDDA(void) {
 	if (playing) {
@@ -359,6 +366,7 @@ static void startCDDA(void) {
 	pthread_create(&threadid, NULL, playthread, NULL);
 #endif
 }
+#endif
 
 // this function tries to get the .toc file of the given .bin
 // the necessary data is put into the ti (trackinformation)-array
@@ -1525,7 +1533,9 @@ long CDR_close(void) {
 		fclose(subHandle);
 		subHandle = NULL;
 	}
+#if 0
 	stopCDDA();
+#endif
 	cddaHandle = NULL;
 
 	if (compr_img != NULL) {
@@ -1664,6 +1674,7 @@ long CDR_readTrack(unsigned char *time) {
 	return 0;
 }
 
+#if 0
 // plays cdda audio
 // sector: byte 0 - minute; byte 1 - second; byte 2 - frame
 // does NOT uses bcd format
@@ -1695,10 +1706,13 @@ long CDR_play(unsigned char *time) {
 
 	return 0;
 }
+#endif
 
 // stops cdda audio
 long CDR_stop(void) {
+#if 0
 	stopCDDA();
+#endif
 	return 0;
 }
 

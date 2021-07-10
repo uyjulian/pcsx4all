@@ -100,7 +100,7 @@ extern struct psx_gpu gpu;
 
 extern const unsigned char cmd_lengths[256];
 
-int do_cmd_list(uint32_t *list, int count, int *last_cmd);
+int do_cmd_list(unsigned int *list, int count, int *last_cmd);
 
 struct gpulib_config_t {
 #ifdef GPULIB_USE_MMAP

@@ -103,7 +103,9 @@ long CDR_getTN(unsigned char *);
 long CDR_getTD(unsigned char , unsigned char *);
 long CDR_readTrack(unsigned char *);
 extern unsigned char *(*CDR_getBuffer)(void);
+#if 0
 long CDR_play(unsigned char *);
+#endif
 long CDR_stop(void);
 long CDR_getStatus(struct CdrStat *);
 unsigned char *CDR_getBufferSub(void);

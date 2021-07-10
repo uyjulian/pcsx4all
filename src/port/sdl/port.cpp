@@ -28,6 +28,8 @@
 #include "gpu/gpu_unai/gpu.h"
 #endif
 
+#define PATH_MAX 4096
+
 enum {
 	DKEY_SELECT = 0,
 	DKEY_L3,
@@ -604,7 +606,7 @@ with mingw build. */
 #undef main
 #endif
 
-int main (int argc, char **argv)
+extern "C" int SDL_main (int argc, char **argv)
 {
 	char filename[256];
 	const char *cdrfilename = GetIsoFile();

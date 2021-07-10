@@ -28,7 +28,9 @@
 // We only support CPU stats on UNIX platforms
 #ifndef _WIN32
 #include <sys/resource.h>
+#if 0
 #define PERFMON_CPU_STATS
+#endif
 #endif
 
 #ifdef _WIN32

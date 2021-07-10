@@ -76,9 +76,12 @@ static void SOUND_FillAudio(void *unused, Uint8 *stream, int len) {
 		if (buf_read_pos >= SOUND_BUFFER_SIZE)
 			buf_read_pos -= SOUND_BUFFER_SIZE;
 
+#if 0
 		// Atomically decrement 'buffered_bytes' by 'bytes_to_copy'
 		// TODO: If ever ported to SDL2.0, its API offers portable atomics:
 		__sync_fetch_and_sub(&buffered_bytes, bytes_to_copy);
+#endif
+		buffered_bytes -= bytes_to_copy;
 	}
 
 	// If the callback asked for more samples than we had, zero-fill remainder:
@@ -240,9 +243,12 @@ static void sdl_feed(void *pSound, int lBytes) {
 
 	buf_write_pos = (buf_write_pos + bytes_to_copy) % SOUND_BUFFER_SIZE;
 
+#if 0
 	// Atomically increment 'buffered_bytes' by 'bytes_to_copy':
 	// TODO: If ever ported to SDL2.0, its API offers portable atomics:
 	__sync_fetch_and_add(&buffered_bytes, bytes_to_copy);
+#endif
+	buffered_bytes += bytes_to_copy;
 }
 
 #ifdef DEBUG_FEED_RATIO

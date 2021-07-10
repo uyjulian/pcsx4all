@@ -20,7 +20,9 @@
 
 #if !defined(_WIN32) && !defined(NO_OS)
 #include <sys/time.h> // gettimeofday in xa.c
-#define THREAD_ENABLED 1
+#if 0
+#define THREAD_ENABLED 0
+#endif
 #endif
 #include "stdafx.h"
 

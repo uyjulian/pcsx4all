@@ -674,8 +674,10 @@ void cdrInterrupt()
 			ReadTrack(cdr.SetSectorPlay);
 			cdr.TrackChanged = FALSE;
 
+#if 0
 			if (!Config.Cdda)
 				CDR_play(cdr.SetSectorPlay);
+#endif
 
 			// Vib Ribbon: gameplay checks flag
 			cdr.StatP &= ~STATUS_SEEK;
@@ -1352,7 +1354,7 @@ void cdrWrite1(unsigned char rt) {
 			set_loc[i] = btoi(cdr.Param[i]);
 
 		i = msf2sec(cdr.SetSectorPlay);
-		i = abs(i - msf2sec(set_loc));
+		i = abs(i - (int)msf2sec(set_loc));
 		if (i > 16)
 			cdr.Seeked = SEEK_PENDING;
 
@@ -1668,8 +1670,10 @@ int cdrFreeze(void *f, FreezeMode mode)
 				memcpy(cdr.SetSectorPlay, cdr.SetSector, 3);
 
 			Find_CurTrack(cdr.SetSectorPlay);
+#if 0
 			if (!Config.Cdda)
 				CDR_play(cdr.SetSectorPlay);
+#endif
 		}
 
 		if ((cdr.freeze_ver & 0xffffff00) != 0x63647200) {

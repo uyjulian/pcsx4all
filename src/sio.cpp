@@ -570,7 +570,9 @@ int FlushMcd(enum MemcardNum mcd_num, bool sync_file)
 	int retval = 0;
 	if (sync_file) {
 		if (fflush(mc.file)) retval = -1;
+#if 0
 		if (fsync(fileno(mc.file))) retval = -1;
+#endif
 	}
 	if (fclose(mc.file)) retval = -1;
 	mc.file = NULL;
@@ -647,8 +649,7 @@ int CreateMcd(char *filename, bool overwrite_file)
 	InitMcdData(mcd_data);
 	if ( (f = fopen(filename, "wb")) == NULL          ||
 	     fwrite(mcd_data, 1, MCD_SIZE, f) != MCD_SIZE ||
-	     fflush(f)                                    ||
-	     fsync(fileno(f)) )
+	     fflush(f)  )
 		goto error;
 
 	if (fclose(f)) {

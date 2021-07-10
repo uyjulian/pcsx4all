@@ -32,6 +32,8 @@
 #include "gpu/gpu_unai/gpu.h"
 #endif
 
+#define PATH_MAX 4096
+
 #define timer_delay(a)	wait_ticks(a*1000)
 
 enum  {

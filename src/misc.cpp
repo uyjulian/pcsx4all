@@ -593,7 +593,7 @@ static void *zlib_open(const char *name, boolean writing)
 		return NULL;
 	}
 
-#if defined(_WIN32) && !defined(__CYGWIN__)
+#if 1
 	// Windows without Cygwin:
 	// Let zlib handle all file operations
 	if ((gzfile_ptr = (void*)gzopen(name, zlib_mode)) == NULL)
@@ -658,10 +658,12 @@ static int zlib_close(void *file)
 	int retval = 0;
 	if (gzclose((gzFile)file) != Z_OK) retval = -1;
 
+#if 0
 #if !(defined(_WIN32) && !defined(__CYGWIN__))
 	if (fsync(SaveFuncs.fd)) retval = -1;
 	if (close(SaveFuncs.fd)) retval = -1;
 	SaveFuncs.fd = SaveFuncs.lib_fd = -1;
+#endif
 #endif
 
 	return retval;
